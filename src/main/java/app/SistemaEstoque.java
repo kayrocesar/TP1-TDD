@@ -17,7 +17,13 @@ public class SistemaEstoque {
     }
 
     public void cadastrarProduto(Produto produto) throws DescricaoEmBrancoException {
-        throw  new DescricaoEmBrancoException("Campo não pode ficar vazio!");
+
+        if (produto.getNome().isBlank() || produto.getDescricao().isBlank() || produto.getCodigoBarras().isBlank() || produto.getCusto().isNaN()
+                || produto.getPrecoVenda().isNaN() || (produto.getQtd() == null) || (produto.getQtdMinima() == null) || (produto.getDataVencimento() == null)
+                || (produto.getLote() == null) || (produto.getCategoria() == null) || (produto.getFornecedor() == null)) {
+            throw new DescricaoEmBrancoException("Campo não pode ficar vazio!");
+        }
+        this.produtos.add(produto);
     }
 
     public ArrayList<Produto> getProdutos() {

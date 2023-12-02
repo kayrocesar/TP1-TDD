@@ -160,6 +160,51 @@ public class CadastroProdutoTest {
         assertThrows(DescricaoEmBrancoException.class, () -> sistemaEstoque.cadastrarProduto(produto2));
 
     }
+    @Test
+    public void cadastrarTresProdutoComCampoEmBrancoTest() {
+        Produto produto1 = new Produto("",
+                "Brigadeiro gourmet com chocolate 60% cacau",
+                "123456100",
+                3.0,
+                10.0,
+                200,
+                50,
+                LocalDate.of(2024, 1, 5),
+                1,
+                Categoria.DOCE,
+                new Fornecedor("Doces do seu João INC", "41.100.040/0001-61"));
+
+
+        Produto produto2 = new Produto("",
+                "",
+                "",
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        Produto produto3 = new Produto("Brigadeiro",
+                "Brigadeiro gourmet com chocolate 60% cacau",
+                "123456100",
+                3.0,
+                10.0,
+                200,
+                50,
+                LocalDate.of(2024, 1, 5),
+                1,
+                Categoria.DOCE,
+                new Fornecedor("Doces do seu João INC", "41.100.040/0001-61"));
+
+        assertThrows(DescricaoEmBrancoException.class, () -> sistemaEstoque.cadastrarProduto(produto1));
+        assertThrows(DescricaoEmBrancoException.class, () -> sistemaEstoque.cadastrarProduto(produto2));
+        assertDoesNotThrow(() -> sistemaEstoque.cadastrarProduto(produto3));
+
+
+    }
 
 
 
