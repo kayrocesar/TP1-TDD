@@ -6,6 +6,8 @@ import model.Alerta;
 import model.Fornecedor;
 import model.Produto;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -38,15 +40,20 @@ public class AlertaEstoqueTest {
         );
     }
 
-    @Test
     @DisplayName("Deve emitir um alerta ao atingir a quantidade mínimo ou menor que a quantidade mínima no estoque")
-    void emitirAlertaDeEstoqueBaixoTest() throws EstoqueNegativoException {
+    @ParameterizedTest
+    @CsvSource({
+            "5, 5",
+            "5, 10",
+            "0, 5",
+    })
+    void emitirAlertaDeEstoqueBaixoTest(int quantidade, int quantidadeMin) throws EstoqueNegativoException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
         // Dado que o estoque tem a quantidade de produtos igual a quantidade mínima
-        produtoMocked.setQtd(5);
-        produtoMocked.setQtdMinima(10);
+        produtoMocked.setQtd(quantidade);
+        produtoMocked.setQtdMinima(quantidadeMin);
 
         // Quando a função de validarQuantidadeEstoqueProduto for chamada
         alertaTester.emitirAlerta(produtoMocked);
@@ -56,54 +63,29 @@ public class AlertaEstoqueTest {
         String textoDaStdOut = outputStream.toString().trim();
 
         // Deve avisar que tem quantidade mínima
-        assertEquals("Produto Bolo de chocolate atingiu 5 no estoque.\n A quantidade mínima é 10\nFornecedor : Bolos da dona maria LTDA", textoDaStdOut);
+        assertEquals("Produto Bolo de chocolate atingiu " + quantidade + " no estoque.\n A quantidade mínima é "+quantidadeMin + "\nFornecedor : Bolos da dona maria LTDA", textoDaStdOut);
     }
 
-    @Test
-    @DisplayName("Deve emitir um alerta ao atingir a quantidade mínimo no estoque")
-    void emitirAlertaDeEstoqueBaixoTest2() throws EstoqueNegativoException {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
-        // Dado que o estoque tem a quantidade de produtos igual a quantidade mínima
-        produtoMocked.setQtd(5);
-        produtoMocked.setQtdMinima(5);
-
-        // Quando a função de validarQuantidadeEstoqueProduto for chamada
-        alertaTester.emitirAlerta(produtoMocked);
-
-        System.setOut(System.out);
-
-        String textoDaStdOut = outputStream.toString().trim();
-
-        // Deve avisar que tem quantidade mínima
-        assertEquals("Produto Bolo de chocolate atingiu 5 no estoque.\n A quantidade mínima é 5\nFornecedor : Bolos da dona maria LTDA", textoDaStdOut);
-    }
-
-    @Test
+    @ParameterizedTest
+    @CsvSource({
+            "-1",
+            "-2",
+            "-3",
+    })
     @DisplayName("Deve emitir uma exceção quando a quantidade no estoque ficar negativa")
-    void emitirExcecaoEstoqueNegativoTest() throws EstoqueNegativoException{
+    void emitirExcecaoEstoqueNegativoTest(int quantidade) throws EstoqueNegativoException{
         // Dado que o estoque tem a quantidade de produtos igual a quantidade mínima
-        produtoMocked.setQtd(-1);
+        produtoMocked.setQtd(quantidade);
 
         assertThrows(EstoqueNegativoException.class, () -> alertaTester.validarQuantidadeEstoqueProduto(produtoMocked));
     }
 
     @Test
     @DisplayName("Não deve emitir uma exceção quando a quantidade é zero")
-    void emitirExcecaoEstoqueNegativoTest2() throws EstoqueNegativoException{
+    void emitirExcecaoEstoqueNegativoComValorZeroTest() throws EstoqueNegativoException{
         // Dado que o estoque tem a quantidade de produtos igual a quantidade mínima
         produtoMocked.setQtd(0);
 
         assertDoesNotThrow(() -> alertaTester.validarQuantidadeEstoqueProduto(produtoMocked));
-    }
-
-    @Test
-    @DisplayName("Deve emitir uma exceção quando a quantidade no estoque ficar negativa")
-    void emitirExcecaoEstoqueNegativoTest3() throws EstoqueNegativoException{
-        // Dado que o estoque tem a quantidade de produtos igual a quantidade mínima
-        produtoMocked.setQtd(-3);
-
-        assertThrows(EstoqueNegativoException.class, () -> alertaTester.validarQuantidadeEstoqueProduto(produtoMocked));
     }
 }
