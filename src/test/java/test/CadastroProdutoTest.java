@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CadastroProdutoTest {
 
     private SistemaEstoque sistemaEstoque;
-    private Produto produtoNomeEmBranco,produtoEmBranco,produtoNormal,produtoNormal2;
+    private Produto produtoNomeEmBranco,produtoEmBranco,produtoNormal,produtoNormal2,produtoNormal3;
     @BeforeEach
     public void setup() {
         sistemaEstoque = new SistemaEstoque();
@@ -64,6 +64,17 @@ public class CadastroProdutoTest {
                 1,
                 Categoria.SANDUICHE,
                 new Fornecedor("Sanduíches do Seu Carlos", "60.100.040/0001-61"));
+        produtoNormal3 = new Produto("Coca Cola  2L",
+                "Coca Cola 2L Zero Açúcar",
+                "123451000",
+                3.0,
+                7.0,
+                200,
+                100,
+                LocalDate.of(2030, 10, 20),
+                1,
+                Categoria.REFRIGERANTE,
+                new Fornecedor("Coca Cola Brasil", "50.100.040/0001-51"));
     }
     @Test
     public void cadastrarProdutoTest() throws DescricaoEmBrancoException, ValorInvalidoException {
@@ -113,6 +124,15 @@ public class CadastroProdutoTest {
         assertThrows(ValorInvalidoException.class, () -> sistemaEstoque.cadastrarProduto(produtoNormal));
         assertThrows(ValorInvalidoException.class, () -> sistemaEstoque.cadastrarProduto(produtoNormal2));
 
+    }
+    @Test
+    public void cadastrarTresProdutosComValoresInvalidos() {
+        produtoNormal.setCusto(-10.0);
+        produtoNormal2.setQtd(-1);
+        produtoNormal3.setQtdMinima(-7);
+        assertThrows(ValorInvalidoException.class, () -> sistemaEstoque.cadastrarProduto(produtoNormal));
+        assertThrows(ValorInvalidoException.class, () -> sistemaEstoque.cadastrarProduto(produtoNormal2));
+        assertThrows(ValorInvalidoException.class, () -> sistemaEstoque.cadastrarProduto(produtoNormal3));
     }
 
 
