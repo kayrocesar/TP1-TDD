@@ -2,6 +2,6 @@ package enums;
 
 public enum TipoTransacao {
     VENDA,
-    RECEBIMENTO,
+    CADASTRO,
     DEVOLUCAO
 }
