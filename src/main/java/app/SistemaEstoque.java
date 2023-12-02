@@ -24,7 +24,7 @@ public class SistemaEstoque {
                 || (produto.getLote() == null) || (produto.getCategoria() == null) || (produto.getFornecedor() == null)) {
             throw new DescricaoEmBrancoException("Campo não pode ficar vazio!");
         }
-        if( produto.getCusto() == 0.0){
+        if( produto.getCusto() <= 0.0  || produto.getPrecoVenda() <=0.0 || produto.getQtd() <=0 || produto.getQtdMinima()<=0){
             throw new ValorInvalidoException("Valor não pode ser inferior ou igual a zero!");
         }
         this.produtos.add(produto);

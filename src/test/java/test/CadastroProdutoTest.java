@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CadastroProdutoTest {
 
     private SistemaEstoque sistemaEstoque;
-    private Produto produtoNomeEmBranco,produtoEmBranco,produtoNormal;
+    private Produto produtoNomeEmBranco,produtoEmBranco,produtoNormal,produtoNormal2;
     @BeforeEach
     public void setup() {
         sistemaEstoque = new SistemaEstoque();
@@ -53,7 +53,17 @@ public class CadastroProdutoTest {
                 1,
                 Categoria.DOCE,
                 new Fornecedor("Doces do seu João INC", "41.100.040/0001-61"));
-
+        produtoNormal2 = new Produto("Sanduíche",
+                "Misto quente completo",
+                "123456400",
+                2.0,
+                4.0,
+                50,
+                20,
+                LocalDate.of(2025, 1, 5),
+                1,
+                Categoria.SANDUICHE,
+                new Fornecedor("Sanduíches do Seu Carlos", "60.100.040/0001-61"));
     }
     @Test
     public void cadastrarProdutoTest() throws DescricaoEmBrancoException, ValorInvalidoException {
@@ -95,6 +105,13 @@ public class CadastroProdutoTest {
         produtoNormal.setCusto(0.0);
         assertThrows(ValorInvalidoException.class, () -> sistemaEstoque.cadastrarProduto(produtoNormal));
 
+    }
+    @Test
+    public void cadastrarDoisProdutosComValoresInvalidos() {
+        produtoNormal.setCusto(0.0);
+        produtoNormal2.setPrecoVenda(-1.0);
+        assertThrows(ValorInvalidoException.class, () -> sistemaEstoque.cadastrarProduto(produtoNormal));
+        assertThrows(ValorInvalidoException.class, () -> sistemaEstoque.cadastrarProduto(produtoNormal2));
 
     }
 
