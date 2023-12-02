@@ -1,6 +1,7 @@
 package test;
 
 import Exceptions.DescricaoEmBrancoException;
+import Exceptions.ValorInvalidoException;
 import app.SistemaEstoque;
 import enums.Categoria;
 import model.Fornecedor;
@@ -55,18 +56,18 @@ public class CadastroProdutoTest {
 
     }
     @Test
-    public void cadastrarProdutoTest() throws DescricaoEmBrancoException {
+    public void cadastrarProdutoTest() throws DescricaoEmBrancoException, ValorInvalidoException {
         sistemaEstoque.cadastrarProduto(produtoNormal);
         assertEquals(1, sistemaEstoque.getProdutos().size());
     }
     @Test
-    public void cadastrarDoisProdutosTest() throws DescricaoEmBrancoException {
+    public void cadastrarDoisProdutosTest() throws DescricaoEmBrancoException, ValorInvalidoException {
         sistemaEstoque.cadastrarProduto(produtoNormal);
         sistemaEstoque.cadastrarProduto(produtoNormal);
         assertEquals(2, sistemaEstoque.getProdutos().size());
     }
     @Test
-    public void cadastrarTresProdutosTest() throws DescricaoEmBrancoException {
+    public void cadastrarTresProdutosTest() throws DescricaoEmBrancoException, ValorInvalidoException {
         sistemaEstoque.cadastrarProduto(produtoNormal);
         sistemaEstoque.cadastrarProduto(produtoNormal);
         sistemaEstoque.cadastrarProduto(produtoNormal);
@@ -87,5 +88,17 @@ public class CadastroProdutoTest {
         assertThrows(DescricaoEmBrancoException.class, () -> sistemaEstoque.cadastrarProduto(produtoEmBranco));
         assertDoesNotThrow(() -> sistemaEstoque.cadastrarProduto(produtoNormal));
     }
+
+
+    @Test
+    public void cadastrarProdutoComValoresInvalidos() {
+        produtoNormal.setCusto(0.0);
+        assertThrows(ValorInvalidoException.class, () -> sistemaEstoque.cadastrarProduto(produtoNormal));
+
+
+    }
+
+
+
 
 }
