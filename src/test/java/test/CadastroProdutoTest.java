@@ -32,7 +32,7 @@ public class CadastroProdutoTest {
                 LocalDate.of(2020,8,5),
                 1,
                 Categoria.BOLO,
-                new Fornecedor("Bolos da dona maria LTDA", "42.679.040/0001-51"));
+        new Fornecedor("Bolos da dona maria LTDA", "42.679.040/0001-51"));
 
         sistemaEstoque.cadastrarProduto(produto1);
         assertEquals(produto1,sistemaEstoque.getProdutos().get(0));
