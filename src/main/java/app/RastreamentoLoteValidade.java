@@ -28,12 +28,9 @@ public class RastreamentoLoteValidade {
         ArrayList<Boolean> lotesProximosVencimento = new ArrayList<>(Collections.nCopies(qdtLotesDiferentes, false));
         LocalDate dataAtual = LocalDate.now();
 
-
-
-
         for (Produto produto: produtos){
-
-            if (verificarDistanciaDias(dataAtual,produto.getDataVencimento(),10)){
+            Boolean proximoAoVencimento =verificarDistanciaDias(dataAtual,produto.getDataVencimento(),10);
+            if (proximoAoVencimento){
                 lotesProximosVencimento.set(produto.getLote() - 1, true);
                 produto.setPrecoVenda(produto.getPrecoVenda()*0.8);
                 System.out.println("Atenção o produto " + produto.getNome() + " com validade "
@@ -43,7 +40,8 @@ public class RastreamentoLoteValidade {
         }
         for (int i=0; i <lotesProximosVencimento.size(); i++){
             if (lotesProximosVencimento.get(i).equals(true)){
-                System.out.println("Os preços dos itens do lote "+ i+1 + " foram atualizados com um desconto de 20%, pois estavam próximos à data de vencimento." );
+                System.out.println("Os preços dos itens do lote "+ (i+1) +
+                        " foram atualizados com um desconto de 20%, pois estavam próximos à data de vencimento." );
                 controle=true;
             }
         }
@@ -51,8 +49,9 @@ public class RastreamentoLoteValidade {
         return controle;
 
     }
-    private static boolean verificarDistanciaDias(LocalDate data1, LocalDate data2, long minDiasDeDiferenca) {
+    private boolean verificarDistanciaDias(LocalDate data1, LocalDate data2, long minDiasDeDiferenca) {
         long diferenca = Math.abs(ChronoUnit.DAYS.between(data1, data2));
-        return diferenca >= minDiasDeDiferenca;
+        return diferenca <= minDiasDeDiferenca;
+
     }
 }
