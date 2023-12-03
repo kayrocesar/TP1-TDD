@@ -15,7 +15,7 @@ public enum Categoria {
     FRESCO, 
     FRUTA, 
     CARNE, 
-    CHCOCOLATE, 
+    CHOCOLATE, 
     IOGURTE
 }
 
