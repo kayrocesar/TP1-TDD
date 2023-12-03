@@ -79,6 +79,13 @@ public class RastreamentoLoteValidadeTest {
         produtos.add(produto);
         assertEquals(200, rastreamentoLoteValidade.quantidadeTotalProdutoLote(produtos, 1));
     }
+    @Test
+    public void quantidadeTotalProdutoLoteTest2(){
+        ArrayList<Produto> produtos= new ArrayList<>();
+        produtos.add(produto);
+        produtos.add(produto2);
+        assertEquals(250, rastreamentoLoteValidade.quantidadeTotalProdutoLote(produtos, 1));
+    }
 
 
 

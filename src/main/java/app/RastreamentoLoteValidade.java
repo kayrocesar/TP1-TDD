@@ -10,7 +10,14 @@ public class RastreamentoLoteValidade {
         return produto.getQtd();
     }
     public Integer quantidadeTotalProdutoLote(ArrayList<Produto> produtos, Integer numeroLote){
-        return produtos.get(0).getQtd();
+        Integer total=0;
+        for (Produto produto: produtos){
+            if (produto.getLote().equals(numeroLote)){
+                total+=produto.getQtd();
+            }
+
+        }
+        return total;
     }
 
 }
