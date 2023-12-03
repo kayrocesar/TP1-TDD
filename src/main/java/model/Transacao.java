@@ -2,18 +2,20 @@ package model;
 
 
 import enums.TipoTransacao;
+import model.ProdutoQuantidade; 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 
 public  class Transacao {
     private LocalDate data;
-    private Produto produto;
+    private ArrayList<ProdutoQuantidade> produtos; 
     private TipoTransacao tipoTransacao;
 
-    public Transacao(LocalDate data, Produto produto, TipoTransacao tipoTransacao) {
+    public Transacao(LocalDate data, ArrayList<ProdutoQuantidade> produtos, TipoTransacao tipoTransacao) {
         this.data = data;
-        this.produto = produto;
+        this.produtos = produtos;
         this.tipoTransacao = tipoTransacao;
     }
 
@@ -25,12 +27,13 @@ public  class Transacao {
         this.data = data;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public ArrayList<ProdutoQuantidade> getProdutos() {
+        return produtos;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public void addProduto(Produto produto, int quantidade) {
+    	ProdutoQuantidade produtoQuantidade = new ProdutoQuantidade(produto, quantidade); 
+        this.produtos.add(produtoQuantidade);
     }
 
     public TipoTransacao getTipoTransacao() {
@@ -41,11 +44,20 @@ public  class Transacao {
         this.tipoTransacao = tipoTransacao;
     }
     
+    public String listarProdutos() {
+    	String todos_produtos = ""; 
+    	for(ProdutoQuantidade elemento: this.produtos) {
+    		todos_produtos += "Produto: " + elemento.getProduto().getNome() + " Quantidade: " + elemento.getQuantidade() + "\n";  
+    		
+    	}
+    	return todos_produtos; 
+    }
+    
     @Override
     public String toString() {
         return "Transacao{" +
                 "data =" + data +
-                ", produto =" + produto +
+                ", produto =" + this.listarProdutos() +
                 ", tipoTransacao =" + tipoTransacao +
                 '}';
     }

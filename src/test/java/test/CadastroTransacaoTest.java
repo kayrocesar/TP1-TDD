@@ -77,7 +77,7 @@ class CadastroTransacaoTest {
         produtos.add(produtoQuantidade2);
         LocalDate date = LocalDate.now(); 
 		gestao.cadastrarTransacao(date, produtos, TipoTransacao.VENDA); 
-		assertEquals(gestao.getQuantidadeTransacao(), 2); 
+		assertEquals(gestao.getQuantidadeTransacao(), 1); 
 	}
 
 }
