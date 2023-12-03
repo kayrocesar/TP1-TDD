@@ -44,6 +44,7 @@ class CadastroTransacaoTest {
         LocalDate date = LocalDate.now(); 
 		gestao.cadastrarTransacao(date, produtos, TipoTransacao.VENDA); 
 		assertEquals(gestao.getQuantidadeTransacao(), 1); 
+		assertEquals(produto1.getQtd(), 48); 
 	}
 	
 	@Test
@@ -78,7 +79,9 @@ class CadastroTransacaoTest {
         LocalDate date = LocalDate.now(); 
 		gestao.cadastrarTransacao(date, produtos, TipoTransacao.VENDA); 
 		assertEquals(gestao.getQuantidadeTransacao(), 1); 
+		
 	}
+
 
 }
 
