@@ -16,7 +16,7 @@ public class RastreamentoLoteValidadeTest {
 
 
     private RastreamentoLoteValidade rastreamentoLoteValidade;
-    private Produto produto, produto2;
+    private Produto produto, produto2, produto3;
 
     @BeforeEach
     public void setup() {
@@ -42,6 +42,17 @@ public class RastreamentoLoteValidadeTest {
                 1,
                 Categoria.SANDUICHE,
                 new Fornecedor("Sanduíches do Seu Carlos", "60.100.040/0001-61"));
+        produto3 = new Produto("Coca Cola 2L",
+                "Refrigerante Coca Cola 2L Zero Açúcar com embalagem retornavél",
+                "123451000",
+                3.0,
+                7.0,
+                80,
+                100,
+                LocalDate.parse("2030-10-20"),
+                1,
+                Categoria.REFRIGERANTE,
+                new Fornecedor("Coca Cola Brasil", "50.100.040/0001-51"));
     }
 
     @Test
@@ -53,6 +64,13 @@ public class RastreamentoLoteValidadeTest {
     public void quantidadeTotalProdutoTest2() {
         assertEquals(200, rastreamentoLoteValidade.quantidadeTotalProduto(produto));
         assertEquals(50, rastreamentoLoteValidade.quantidadeTotalProduto(produto2));
+    }
+
+    @Test
+    public void quantidadeTotalProdutoTest3() {
+        assertEquals(200, rastreamentoLoteValidade.quantidadeTotalProduto(produto));
+        assertEquals(50, rastreamentoLoteValidade.quantidadeTotalProduto(produto2));
+        assertEquals(80, rastreamentoLoteValidade.quantidadeTotalProduto(produto3));
     }
 
 
