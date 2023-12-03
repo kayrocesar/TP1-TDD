@@ -15,9 +15,13 @@ public class RastreamentoLoteValidade {
             if (produto.getLote().equals(numeroLote)){
                 total+=produto.getQtd();
             }
-
         }
         return total;
     }
-
+    public boolean emiteAlertLoteVencimento(ArrayList<Produto> produtos, Integer qdtLotesDiferentes) {
+        System.out.println("Atenção o lote " + produtos.get(0).getLote() + " com validade "
+                + produtos.get(0).getDataVencimento() + " está próximo ao vencimento, o preço de venda foi atualizado de R$"
+                + produtos.get(0).getPrecoVenda() + " para R$" +produtos.get(0).getPrecoVenda()*0.8 );
+        return  true;
+    }
 }

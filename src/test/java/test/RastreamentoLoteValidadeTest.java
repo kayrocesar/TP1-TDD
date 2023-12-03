@@ -29,7 +29,7 @@ public class RastreamentoLoteValidadeTest {
                 10.0,
                 200,
                 50,
-                LocalDate.parse("2024-01-05"),
+                LocalDate.parse("2023-12-13"),
                 1, Categoria.DOCE,
                 new Fornecedor("Doces da Mamãe SA", "41.100.040/0001-61"));
         produto2 = new Produto("Sanduíche Frio",
@@ -39,7 +39,7 @@ public class RastreamentoLoteValidadeTest {
                 5.0,
                 50,
                 20,
-                LocalDate.parse("2023-12-25"),
+                LocalDate.parse("2023-12-13"),
                 1,
                 Categoria.SANDUICHE,
                 new Fornecedor("Sanduíches do Seu Carlos", "60.100.040/0001-61"));
@@ -95,6 +95,12 @@ public class RastreamentoLoteValidadeTest {
         assertEquals(250, rastreamentoLoteValidade.quantidadeTotalProdutoLote(produtos, 1));
     }
 
+    @Test
+    public void emiteAlertLoteVencimentoTest(){
+        ArrayList<Produto> produtos= new ArrayList<>();
+        produtos.add(produto);
+        assertEquals(true, rastreamentoLoteValidade.emiteAlertLoteVencimento(produtos, 1));
+    }
 
 
 
