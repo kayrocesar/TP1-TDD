@@ -51,7 +51,7 @@ public class RastreamentoLoteValidadeTest {
                 80,
                 100,
                 LocalDate.parse("2030-10-20"),
-                1,
+                2,
                 Categoria.REFRIGERANTE,
                 new Fornecedor("Coca Cola Brasil", "50.100.040/0001-51"));
     }
@@ -84,6 +84,14 @@ public class RastreamentoLoteValidadeTest {
         ArrayList<Produto> produtos= new ArrayList<>();
         produtos.add(produto);
         produtos.add(produto2);
+        assertEquals(250, rastreamentoLoteValidade.quantidadeTotalProdutoLote(produtos, 1));
+    }
+    @Test
+    public void quantidadeTotalProdutoLoteTest3(){
+        ArrayList<Produto> produtos= new ArrayList<>();
+        produtos.add(produto);
+        produtos.add(produto2);
+        produtos.add(produto3);
         assertEquals(250, rastreamentoLoteValidade.quantidadeTotalProdutoLote(produtos, 1));
     }
 
