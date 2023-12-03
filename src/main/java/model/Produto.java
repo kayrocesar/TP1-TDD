@@ -91,7 +91,7 @@ public class Produto {
     }
 
     public int getQtd() {
-        return 48;
+        return qtd;
     }
 
     public void setQtd(int qtd) {

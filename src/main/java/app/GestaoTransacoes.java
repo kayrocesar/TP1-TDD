@@ -29,7 +29,22 @@ public class GestaoTransacoes {
 
     public void cadastrarTransacao(LocalDate data, ArrayList<ProdutoQuantidade> produtos, TipoTransacao tipoTransacao) {
     	Transacao transacao = new Transacao(data, produtos, tipoTransacao); 
+    	atualizarEstoque(transacao); 
     	this.transacoes.add(transacao); 
     }
    
+    public void atualizarEstoque(Transacao transacao) {
+    	if(transacao.getTipoTransacao() == TipoTransacao.VENDA) {
+	    	for(ProdutoQuantidade elemento: transacao.getProdutos()) {
+	    		elemento.getProduto().diminuirQtd(elemento.getQuantidade());
+	    	}
+    	}
+    	else {
+	    	for(ProdutoQuantidade elemento: transacao.getProdutos()) {
+	    		elemento.getProduto().adicionarQtd(elemento.getQuantidade());
+    	}
+    
+    	}
+    }
+    
 }
