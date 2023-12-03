@@ -1,41 +1,50 @@
 package test;
 
-import app.GestaoTransacoes;
-import enums.*;
-import model.Fornecedor;
-import model.Produto;
-import model.ProdutoQuantidade; 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
-import java.time.LocalDate;
+import app.GestaoTransacoes;
+import enums.Categoria;
+import enums.TipoTransacao;
+import model.Fornecedor;
+import model.Produto;
+import model.ProdutoQuantidade;
+import model.Transacao;
 
 class CadastroTransacaoTest {
 	
 	private GestaoTransacoes gestao;
-	
-	@ParameterizedTest
-	@CsvSource({
-		
-	})
+//	
+//	@ParameterizedTest
+//	@MethodSource()
 	
 	
 	@BeforeEach
 	public void setup() {
 		gestao = new GestaoTransacoes(); 
 	}
-		
+	
 	@Test
-	public void testCadastroTransacao() { 
+	public void testCadastroNegativoTransacao() {
+		Transacao transacao = new Transacao();
+		assertEquals(gestao.getQuantidadeTransacao(), 1);
+		assertNotEquals(transacao.getTipoTransacao(), TipoTransacao.AJUSTE);
+		for (ProdutoQuantidade produtoQuantidade : transacao.getProdutos()) {
+			ProdutoQuantidade produtoQtd = new ProdutoQuantidade(produtoQuantidade.getProduto() , result);
+			
+			assertTrue(produtoQtd.getQuantidade() > produtoQtd.getProduto().getQtd());
+		}
+	}
+	
+	@Test
+	public void testCadastroTransacao() {
         Produto produto1 = new Produto("Coca cola",
                 "Coca cola de 2 litros sem acucar",
                "271462742",
@@ -88,9 +97,8 @@ class CadastroTransacaoTest {
         LocalDate date = LocalDate.now(); 
 		gestao.cadastrarTransacao(date, produtos, TipoTransacao.DEVOLUCAO); 
 		assertEquals(gestao.getQuantidadeTransacao(), 1); 
-		assertEquals(produto1.getQtd(), 52); 
-		assertEquals(produto2.getQtd(), 40); 
-		
+		assertEquals(produto1.getQtd(), 52);
+		assertEquals(produto2.getQtd(), 40);
 	}
 
 	@Test

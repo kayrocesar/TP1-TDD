@@ -32,6 +32,11 @@ public class GestaoTransacoes {
     	atualizarEstoque(transacao); 
     	this.transacoes.add(transacao); 
     }
+    
+    public void cadastrarTransacao(Transacao transacao) {
+    	atualizarEstoque(transacao);
+    	this.transacoes.add(transacao);
+    }
    
     public void atualizarEstoque(Transacao transacao) {
     	if(transacao.getTipoTransacao() == TipoTransacao.VENDA) {

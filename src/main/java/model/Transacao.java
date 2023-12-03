@@ -18,6 +18,9 @@ public  class Transacao {
         this.produtos = produtos;
         this.tipoTransacao = tipoTransacao;
     }
+    
+    public Transacao() {
+    }
 
     public LocalDate getData() {
         return data;
