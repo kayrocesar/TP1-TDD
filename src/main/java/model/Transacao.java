@@ -40,13 +40,13 @@ public  class Transacao {
     public void setTipoTransacao(TipoTransacao tipoTransacao) {
         this.tipoTransacao = tipoTransacao;
     }
-
+    
     @Override
     public String toString() {
         return "Transacao{" +
-                "data=" + data +
-                ", produto=" + produto +
-                ", tipoTransacao=" + tipoTransacao +
+                "data =" + data +
+                ", produto =" + produto +
+                ", tipoTransacao =" + tipoTransacao +
                 '}';
     }
 }
