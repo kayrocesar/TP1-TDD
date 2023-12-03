@@ -101,6 +101,14 @@ public class RastreamentoLoteValidadeTest {
         produtos.add(produto);
         assertEquals(true, rastreamentoLoteValidade.emiteAlertLoteVencimento(produtos, 1));
     }
+    @Test
+    public void emiteAlertLoteVencimentoTest2(){
+        ArrayList<Produto> produtos= new ArrayList<>();
+        produtos.add(produto);
+        produtos.add(produto2);
+        assertEquals(true, rastreamentoLoteValidade.emiteAlertLoteVencimento(produtos, 1));
+    }
+
 
 
 
