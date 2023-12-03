@@ -12,11 +12,11 @@ public class Produto {
     private String codigoBarras;
     private Double custo;
     private Double precoVenda;
-    private int qtd;
-    private int qtdMinima;
+    private Integer qtd;
+    private Integer qtdMinima;
 
     private LocalDate dataVencimento;
-    private int lote;
+    private Integer lote;
 
     private Categoria categoria;
 
@@ -29,10 +29,10 @@ public class Produto {
             String codigoBarras,
             Double custo,
             Double precoVenda,
-            int qtd,
-            int qtdMinima,
+            Integer qtd,
+            Integer qtdMinima,
             LocalDate dataVencimento,
-            int lote,
+            Integer lote,
             Categoria categoria,
             Fornecedor fornecedor)
     {
@@ -90,19 +90,19 @@ public class Produto {
         this.precoVenda = precoVenda;
     }
 
-    public int getQtd() {
+    public Integer getQtd() {
         return qtd;
     }
 
-    public void setQtd(int qtd) {
+    public void setQtd(Integer qtd) {
         this.qtd = qtd;
     }
 
-    public int getQtdMinima() {
+    public Integer getQtdMinima() {
         return qtdMinima;
     }
 
-    public void setQtdMinima(int qtdMinima) {
+    public void setQtdMinima(Integer qtdMinima) {
         this.qtdMinima = qtdMinima;
     }
 
@@ -114,11 +114,11 @@ public class Produto {
         this.dataVencimento = dataVencimento;
     }
 
-    public int getLote() {
+    public Integer getLote() {
         return lote;
     }
 
-    public void setLote(int lote) {
+    public void setLote(Integer lote) {
         this.lote = lote;
     }
 
