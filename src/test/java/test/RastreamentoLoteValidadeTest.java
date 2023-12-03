@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class RastreamentoLoteValidadeTest {
 
@@ -72,6 +73,15 @@ public class RastreamentoLoteValidadeTest {
         assertEquals(50, rastreamentoLoteValidade.quantidadeTotalProduto(produto2));
         assertEquals(80, rastreamentoLoteValidade.quantidadeTotalProduto(produto3));
     }
+    @Test
+    public void quantidadeTotalProdutoLoteTest(){
+        ArrayList<Produto> produtos= new ArrayList<>();
+        produtos.add(produto);
+        assertEquals(200, rastreamentoLoteValidade.quantidadeTotalProdutoLote(produtos, 1));
+    }
+
+
+
 
 
 }
