@@ -29,28 +29,52 @@ public class RastreamentoLoteValidadeTest {
     @BeforeEach
     public void setup() {
         rastreamentoLoteValidade = new RastreamentoLoteValidade();
-
     }
 
-    @Test
-    public void quantidadeTotalProdutoTest() {
-        assertEquals(200, rastreamentoLoteValidade.quantidadeTotalProduto(produto));
+    static Stream<Arguments> produtos1() {
+        return Stream.of(
+                Arguments.of( new Produto("Brigadeiro",
+                        "Lata de Brigadeiro 500g pronta para uso",
+                        "123456100",
+                        2.0,
+                        10.0,
+                        200,
+                        50,
+                        LocalDate.parse("2023-12-13"),
+                        1, Categoria.DOCE,
+                        new Fornecedor("Doces da Mamãe SA", "41.100.040/0001-61")),200),
+                Arguments.of(new Produto("Sanduíche Frio",
+                        "Sanduíche de frango desfiado com alface e tomate pronto para consumo",
+                        "123451222",
+                        2.0,
+                        5.0,
+                        50,
+                        20,
+                        LocalDate.parse("2023-12-13"),
+                        1,
+                        Categoria.SANDUICHE,
+                        new Fornecedor("Sanduíches do Seu Carlos", "60.100.040/0001-61")),50),
+                Arguments.of(new Produto("Coca Cola 2L",
+                        "Refrigerante Coca Cola 2L Zero Açúcar com embalagem retornavél",
+                        "123451000",
+                        3.0,
+                        7.0,
+                        80,
+                        100,
+                        LocalDate.parse("2030-10-20"),
+                        2,
+                        Categoria.REFRIGERANTE,
+                        new Fornecedor("Coca Cola Brasil", "50.100.040/0001-51")),80));
+    }
+    @ParameterizedTest
+    @MethodSource("produtos1")
+    public void quantidadeTotalProdutoTest(Produto produto, Integer qtdTotalEsperada) {
+        assertEquals(qtdTotalEsperada, rastreamentoLoteValidade.quantidadeTotalProduto(produto));
     }
 
-    @Test
-    public void quantidadeTotalProdutoTest2() {
-        assertEquals(200, rastreamentoLoteValidade.quantidadeTotalProduto(produto));
-        assertEquals(50, rastreamentoLoteValidade.quantidadeTotalProduto(produto2));
-    }
 
-    @Test
-    public void quantidadeTotalProdutoTest3() {
-        assertEquals(200, rastreamentoLoteValidade.quantidadeTotalProduto(produto));
-        assertEquals(50, rastreamentoLoteValidade.quantidadeTotalProduto(produto2));
-        assertEquals(80, rastreamentoLoteValidade.quantidadeTotalProduto(produto3));
-    }
-    
-    static Stream<Arguments> produtos() {
+
+    static Stream<Arguments> produtos2() {
         return Stream.of(
                 Arguments.of( new Produto("Brigadeiro",
                         "Lata de Brigadeiro 500g pronta para uso",
@@ -86,8 +110,8 @@ public class RastreamentoLoteValidadeTest {
                         new Fornecedor("Coca Cola Brasil", "50.100.040/0001-51")),250));
     }
     @ParameterizedTest
-    @MethodSource("produtos")
-    public void quantidadeTotalProdutoLoteTest(Produto produto, Integer qtdTotalEsperada) throws DescricaoEmBrancoException, ValorInvalidoException {
+    @MethodSource("produtos2")
+    public void quantidadeTotalProdutoLoteTest(Produto produto, Integer qtdTotalEsperada)  {
         produtos.add(produto);
         assertEquals(qtdTotalEsperada, rastreamentoLoteValidade.quantidadeTotalProdutoLote(produtos, 1));
     }
