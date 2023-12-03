@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import Exceptions.ValorInvalidoException;
 import app.GestaoTransacoes;
 import enums.Categoria;
 import enums.TipoTransacao;
@@ -32,14 +33,26 @@ class CadastroTransacaoTest {
 	}
 	
 	@Test
-	public void testCadastroNegativoTransacao() {
-		Transacao transacao = new Transacao();
-		assertEquals(gestao.getQuantidadeTransacao(), 1);
+	public void testCadastroNegativoTransacao() throws ValorInvalidoException {
+		Produto produto1 = new Produto("Coca cola",
+                "Coca cola de 2 litros sem acucar",
+               "271462742",
+               20.0,
+               10.0,
+               50,
+               2,
+               LocalDate.of(2023,12,1),
+               1,
+               Categoria.REFRIGERANTE,
+               new Fornecedor("Brasal Refrigerantes LTDA", "60.444.444/0001-48"));
+        ArrayList<ProdutoQuantidade> produtos = new ArrayList<> ();
+        ProdutoQuantidade produtoQuantidade = new ProdutoQuantidade(produto1, 50);
+        produtos.add(produtoQuantidade);
+        LocalDate date = LocalDate.now();
+        Transacao transacao = new Transacao(date, produtos, TipoTransacao.DEVOLUCAO);
 		assertNotEquals(transacao.getTipoTransacao(), TipoTransacao.AJUSTE);
-		for (ProdutoQuantidade produtoQuantidade : transacao.getProdutos()) {
-			ProdutoQuantidade produtoQtd = new ProdutoQuantidade(produtoQuantidade.getProduto() , result);
-			
-			assertTrue(produtoQtd.getQuantidade() > produtoQtd.getProduto().getQtd());
+		for (ProdutoQuantidade produtoQtd : transacao.getProdutos()) {
+			assertTrue(produtoQtd.getQuantidade() <= produtoQtd.getProduto().getQtd());
 		}
 	}
 	
@@ -56,7 +69,7 @@ class CadastroTransacaoTest {
                1,
                Categoria.REFRIGERANTE,
                new Fornecedor("Brasal Refrigerantes LTDA", "60.444.444/0001-48"));
-        ProdutoQuantidade produtoQuantidade = new ProdutoQuantidade(produto1, 2); 
+        ProdutoQuantidade produtoQuantidade = new ProdutoQuantidade(produto1, 2);
         ArrayList<ProdutoQuantidade> produtos = new ArrayList<> ();  
         produtos.add(produtoQuantidade);
         LocalDate date = LocalDate.now(); 
