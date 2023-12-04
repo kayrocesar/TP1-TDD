@@ -56,7 +56,7 @@ mvn test
 Alternativa: instalar a uma IDE de sua preferencia [IntelliJ](https://www.jetbrains.com/pt-br/idea/) ou [Eclipse](https://eclipseide.org/) e rodar os testes por elas.
 
 ## Testes implementados
-![testes]()
+![testes](https://raw.githubusercontent.com/kayrocesar/TP1-TDD/master/assets/testes.png)
 
 ## Como foi feito?
 &emsp;&emsp; Para início nos reunimos por discord para discutir como separaríamos as tarefas, e analisamos o contexto do trabalho, decidimos dividir da maneira que mostramos na tabela acima, decidimos pelo uso da linguagem de programação JAVA, por ter sido a linguagem que o professor utilizou em sala e no decorrer do projeto foram utilizadas as seguintes técnicas:
