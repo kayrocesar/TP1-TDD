@@ -9,6 +9,54 @@
 |Kayro Cesar Silva Machado|170107426|Cadastro de Produtos|
 |Luan Vasco Cavalcante | 190111836 | Alerta de estoque baixo|
 |Lucas Gabriel Sousa Camargo Paiva|190112123|Rastreamento de estoque|
+## Para rodar os testes
+
+
+### Passo 1: Instalar o JDK 17
+
+##### Atualize o repositório APT:
+
+```
+sudo apt update
+```
+
+##### Instale o JDK 17:
+
+ ```
+sudo apt install openjdk-17-jdk
+ ```
+##### Configure as variáveis de ambiente:
+Abra o arquivo .bashrc ou .zshrc no seu editor de texto  e adicione as seguintes linhas no final do arquivo (substitua <caminho-do-jdk-17> pelo caminho real do seu JDK 17):
+
+```
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export PATH=$PATH:$JAVA_HOME/bin
+```
+
+### Passo 2: Instalar o Maven
+Instale o Maven:
+
+```
+sudo apt install maven
+```
+### Passo 3: Clonar o projeto
+
+```
+git clone git@github.com:kayrocesar/TP1-TDD.git
+```
+### Passo 4: Executar os testes
+Entre na pasta do projeto:
+```
+cd TP1-TDD/
+```
+Rode os testes:
+```
+mvn test
+```
+Alternativa: instalar a uma IDE de sua preferencia [IntelliJ](https://www.jetbrains.com/pt-br/idea/) ou [Eclipse](https://eclipseide.org/) e rodar os testes por elas.
+
+## Testes implementados
+![testes]()
 
 ## Como foi feito?
 &emsp;&emsp; Para início nos reunimos por discord para discutir como separaríamos as tarefas, e analisamos o contexto do trabalho, decidimos dividir da maneira que mostramos na tabela acima, decidimos pelo uso da linguagem de programação JAVA, por ter sido a linguagem que o professor utilizou em sala e no decorrer do projeto foram utilizadas as seguintes técnicas:
