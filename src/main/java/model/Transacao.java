@@ -2,7 +2,6 @@ package model;
 
 
 import enums.TipoTransacao;
-import model.ProdutoQuantidade; 
 
 import java.time.LocalDate;
 import java.util.ArrayList;

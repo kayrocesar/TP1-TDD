@@ -3,6 +3,7 @@ package app;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import Exceptions.ValorInvalidoException;
 import enums.TipoTransacao;
 import model.ProdutoQuantidade;
 import model.Transacao;
@@ -50,6 +51,14 @@ public class GestaoTransacoes {
     	}
     
     	}
+    }
+    
+    public void validarTransacao(Transacao transacao) throws ValorInvalidoException{
+    	for (ProdutoQuantidade produtoQtd : transacao.getProdutos()) {
+			if(produtoQtd.getQuantidade() < 0) {
+				throw new ValorInvalidoException("O valor da transacao não pode ser negativo para não ajustes.");
+			}    			
+		}
     }
     
 }
