@@ -5,7 +5,18 @@ public enum Categoria {
     BOLO,
     REFRIGERANTE,
     DOCE,
-    SANDUICHE
+    SANDUICHE, 
+    CONGELADO, 
+    ENLATADO, 
+    FRANGO, 
+    MACARRAO, 
+    ARROZ, 
+    FEIJAO, 
+    FRESCO, 
+    FRUTA, 
+    CARNE, 
+    CHOCOLATE, 
+    IOGURTE
 }
 
 

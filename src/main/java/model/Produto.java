@@ -137,7 +137,15 @@ public class Produto {
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
     }
+    
+    public void adicionarQtd(int quantidade) {
+    	this.qtd = qtd + quantidade;
+    }
 
+    public void diminuirQtd(int quantidade) {
+    	this.qtd = qtd - quantidade;
+    }
+    
     @Override
     public String toString() {
         return "\nProduto{" +
